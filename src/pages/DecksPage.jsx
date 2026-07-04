@@ -7,7 +7,8 @@ export default function DecksPage() {
   const [decks, setDecks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [newDeckName, setNewDeckName] = useState("");
+  const [newDeckTitle, setNewDeckTitle] = useState("");
+  const [newDeckDescription, setNewDeckDescription] = useState("");
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
@@ -29,13 +30,17 @@ export default function DecksPage() {
 
   async function handleCreate(e) {
     e.preventDefault();
-    if (!newDeckName.trim()) return;
+    if (!newDeckTitle.trim()) return;
     setCreating(true);
     setError(null);
     try {
-      const deck = await api.createDeck({ name: newDeckName.trim() });
+      const deck = await api.createDeck({
+        title: newDeckTitle.trim(),
+        description: newDeckDescription.trim(),
+      });
       setDecks((prev) => [...prev, deck]);
-      setNewDeckName("");
+      setNewDeckTitle("");
+      setNewDeckDescription("");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -63,9 +68,15 @@ export default function DecksPage() {
       <form className="deck-create" onSubmit={handleCreate}>
         <input
           type="text"
-          placeholder="New deck name (e.g. N5 Kana, Element Symbols)"
-          value={newDeckName}
-          onChange={(e) => setNewDeckName(e.target.value)}
+          placeholder="Deck title (e.g. N5 Kana, Element Symbols)"
+          value={newDeckTitle}
+          onChange={(e) => setNewDeckTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Description (optional)"
+          value={newDeckDescription}
+          onChange={(e) => setNewDeckDescription(e.target.value)}
         />
         <button className="btn btn-primary" type="submit" disabled={creating}>
           {creating ? "Adding…" : "Add deck"}
@@ -83,10 +94,18 @@ export default function DecksPage() {
           {decks.map((deck) => (
             <li key={deck.id} className="card deck-item">
               <Link to={`/decks/${deck.id}`} className="deck-item-name">
-                {deck.name}
+                {deck.title}
+                {deck.description && (
+                  <span className="deck-item-description">
+                    {deck.description}
+                  </span>
+                )}
               </Link>
               <div className="deck-item-actions">
-                <Link to={`/decks/${deck.id}`} className="btn btn-secondary btn-sm">
+                <Link
+                  to={`/decks/${deck.id}`}
+                  className="btn btn-secondary btn-sm"
+                >
                   Edit cards
                 </Link>
                 <button

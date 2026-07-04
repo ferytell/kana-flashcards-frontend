@@ -72,7 +72,7 @@ export const api = {
 
   login: (credentials) => {
     console.log("BASE_URL:", BASE_URL);
-    request(ENDPOINTS.login, {
+    return request(ENDPOINTS.login, {
       method: "POST",
       body: credentials,
       auth: false,
