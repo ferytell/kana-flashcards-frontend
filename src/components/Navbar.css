@@ -1,0 +1,39 @@
+.navbar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.9em 1.25em;
+  display: flex;
+  align-items: center;
+  gap: 1.25em;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-right: auto;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1em;
+}
+
+.navbar-link {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.navbar-link.active {
+  color: var(--color-bloom);
+}
+
+.navbar-link:hover {
+  text-decoration: none;
+  color: var(--color-ink);
+}

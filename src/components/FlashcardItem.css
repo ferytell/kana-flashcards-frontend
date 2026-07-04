@@ -1,0 +1,37 @@
+.flashcard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8em 1em;
+  gap: 1em;
+}
+
+.flashcard-item-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.flashcard-item-front {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.flashcard-item-back {
+  color: var(--color-text-muted);
+}
+
+.flashcard-item-front::after {
+  content: "→";
+  margin-left: 0.8em;
+  color: var(--color-violet);
+  font-weight: 400;
+}
+
+.flashcard-item-actions {
+  display: flex;
+  gap: 0.5em;
+  flex-shrink: 0;
+}
