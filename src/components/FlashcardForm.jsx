@@ -1,48 +1,72 @@
 import { useState } from "react";
 import "./FlashcardForm.css";
 
-// Generic "front / back" flashcard, deliberately not kana-specific,
-// so the same deck/card model works for any subject the user wants
-// to memorize later.
-export default function FlashcardForm({ initial, onSubmit, onCancel, submitLabel }) {
-  const [front, setFront] = useState(initial?.front || "");
-  const [back, setBack] = useState(initial?.back || "");
+// Generic "question / answer" flashcard (matches the confirmed API body:
+// { question, answer, category }), not kana-specific, so the same deck/card
+// model works for any subject the user wants to memorize later.
+export default function FlashcardForm({
+  initial,
+  onSubmit,
+  onCancel,
+  submitLabel,
+}) {
+  const [question, setQuestion] = useState(initial?.question || "");
+  const [answer, setAnswer] = useState(initial?.answer || "");
+  const [category, setCategory] = useState(initial?.category || "");
   const [saving, setSaving] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!front.trim() || !back.trim()) return;
+    if (!question.trim() || !answer.trim()) return;
     setSaving(true);
-    await onSubmit({ front: front.trim(), back: back.trim() });
+    await onSubmit({
+      question: question.trim(),
+      answer: answer.trim(),
+      category: category.trim(),
+    });
     setSaving(false);
   }
 
   return (
     <form className="flashcard-form" onSubmit={handleSubmit}>
       <div className="field">
-        <label htmlFor="front">Front</label>
+        <label htmlFor="question">Question</label>
         <textarea
-          id="front"
+          id="question"
           rows={2}
-          value={front}
-          onChange={(e) => setFront(e.target.value)}
-          placeholder="あ"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder="大きい"
           required
         />
       </div>
       <div className="field">
-        <label htmlFor="back">Back</label>
+        <label htmlFor="answer">Answer</label>
         <textarea
-          id="back"
+          id="answer"
           rows={2}
-          value={back}
-          onChange={(e) => setBack(e.target.value)}
-          placeholder="a"
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          placeholder="Ookii (Big)"
           required
         />
       </div>
+      <div className="field">
+        <label htmlFor="category">Category</label>
+        <input
+          id="category"
+          type="text"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          placeholder="Japanese"
+        />
+      </div>
       <div className="flashcard-form-actions">
-        <button className="btn btn-primary btn-sm" type="submit" disabled={saving}>
+        <button
+          className="btn btn-primary btn-sm"
+          type="submit"
+          disabled={saving}
+        >
           {saving ? "Saving…" : submitLabel || "Save"}
         </button>
         {onCancel && (

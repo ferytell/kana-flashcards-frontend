@@ -24,14 +24,23 @@ export default function FlashcardItem({ card, onUpdate, onDelete }) {
   return (
     <li className="card flashcard-item">
       <div className="flashcard-item-content">
-        <span className="flashcard-item-front">{card.front}</span>
-        <span className="flashcard-item-back">{card.back}</span>
+        <span className="flashcard-item-front">{card.question}</span>
+        <span className="flashcard-item-back">{card.answer}</span>
+        {card.category && (
+          <span className="flashcard-item-category">{card.category}</span>
+        )}
       </div>
       <div className="flashcard-item-actions">
-        <button className="btn btn-secondary btn-sm" onClick={() => setEditing(true)}>
+        <button
+          className="btn btn-secondary btn-sm"
+          onClick={() => setEditing(true)}
+        >
           Edit
         </button>
-        <button className="btn btn-danger btn-sm" onClick={() => onDelete(card.id)}>
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => onDelete(card.id)}
+        >
           Delete
         </button>
       </div>

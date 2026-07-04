@@ -8,8 +8,8 @@ const ENDPOINTS = {
   register: "/auth/register",
   decks: "/decks",
   deck: (id) => `/decks/${id}`,
-  flashcards: (deckId) => `/decks/${deckId}/flashcards`,
-  flashcard: (id) => `/flashcards/${id}`,
+  flashcards: (deckId) => `/decks/${deckId}/cards`,
+  flashcard: (id) => `/cards/${id}`,
   // Not built on the backend yet — see search() below.
   search: "/search",
 };

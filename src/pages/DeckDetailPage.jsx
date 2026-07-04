@@ -21,9 +21,6 @@ export default function DeckDetailPage() {
     setLoading(true);
     setError(null);
     try {
-      // getDeck is optional — if your backend only exposes the flashcards
-      // list for a deck, this call can be removed and deck.name replaced
-      // with a static heading.
       const [deckData, cardData] = await Promise.all([
         api.getDeck(deckId).catch(() => null),
         api.getFlashcards(deckId),
@@ -74,7 +71,10 @@ export default function DeckDetailPage() {
       <Link to="/decks" className="back-link">
         ← All decks
       </Link>
-      <h1>{deck?.name || "Deck"}</h1>
+      <h1>{deck?.title || "Deck"}</h1>
+      {deck?.description && (
+        <p className="deck-description">{deck.description}</p>
+      )}
 
       {error && <div className="error-banner">{error}</div>}
 
