@@ -1,0 +1,44 @@
+name: Deploy React App to Ubuntu Server
+
+on:
+  push:
+    branches: ["react-web"]
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Debug Environment
+        run: |
+          echo "=== ENVIRONMENT DEBUG INFO ==="
+          echo "VITE_API_BASE_URL: $VITE_API_BASE_URL"
+          echo "Secret exists: ${{ secrets.VITE_API_BASE_URL != '' }}"
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "=============================="
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+
+      - name: Build React app
+        run: |
+          echo "Building with API URL: $VITE_API_BASE_URL"
+          npm run build
+        # Remove env here — .env.production will be used automatically!
+
+      - name: Deploy build to server
+        run: |
+          sudo rm -rf /var/www/*
+          sudo mkdir -p /var/www
+          sudo cp -r build/* /var/www/
+          echo "Deployed successfully!"
