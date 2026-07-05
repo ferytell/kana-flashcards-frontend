@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DecksPage from "./pages/DecksPage";
 import DeckDetailPage from "./pages/DeckDetailPage";
+import QuizPage from "./pages/QuizPage";
 import SearchPage from "./pages/SearchPage";
 
 export default function App() {
@@ -29,6 +30,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <DeckDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/decks/:deckId/quiz"
+            element={
+              <ProtectedRoute>
+                <QuizPage />
               </ProtectedRoute>
             }
           />

@@ -1,0 +1,90 @@
+.quiz-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8em;
+  font-size: 0.9em;
+  color: var(--color-text-muted);
+}
+
+.quiz-score {
+  font-weight: 700;
+  color: var(--color-bloom);
+}
+
+.quiz-card {
+  padding: 2em 1.5em;
+  text-align: center;
+}
+
+.quiz-question {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 0.6em;
+  overflow-wrap: anywhere;
+}
+
+.quiz-guess-form {
+  display: flex;
+  gap: 0.6em;
+  margin-top: 1.2em;
+}
+
+.quiz-guess-form input {
+  flex: 1;
+  padding: 0.6em 0.75em;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.quiz-guess-form input:focus {
+  border-color: var(--color-violet);
+}
+
+.quiz-result {
+  margin-top: 1.2em;
+}
+
+.quiz-feedback-correct {
+  color: #1f9d55;
+  font-weight: 700;
+  font-size: 1.1em;
+  margin: 0 0 0.4em;
+}
+
+.quiz-feedback-wrong {
+  color: var(--color-danger);
+  font-weight: 700;
+  font-size: 1.1em;
+  margin: 0 0 0.4em;
+}
+
+.quiz-answer {
+  margin: 0 0 0.3em;
+}
+
+.quiz-your-guess {
+  margin: 0 0 1em;
+  color: var(--color-text-muted);
+  font-size: 0.9em;
+}
+
+.quiz-result .btn {
+  margin-top: 0.6em;
+}
+
+.quiz-summary {
+  text-align: center;
+  padding: 2.5em 1.5em;
+}
+
+.quiz-score-final {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: var(--color-bloom);
+  margin: 0.3em 0 1.2em;
+}

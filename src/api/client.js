@@ -9,7 +9,8 @@ const ENDPOINTS = {
   decks: "/decks",
   deck: (id) => `/decks/${id}`,
   flashcards: (deckId) => `/decks/${deckId}/cards`,
-  flashcard: (id) => `/cards/${id}`,
+  flashcard: (deckId, cardId) => `/decks/${deckId}/cards/${cardId}`,
+  //flashcard: (id) => `/decks/${id}/cards`,
   // Not built on the backend yet — see search() below.
   search: "/search",
 };
@@ -94,10 +95,10 @@ export const api = {
   getFlashcards: (deckId) => request(ENDPOINTS.flashcards(deckId)),
   createFlashcard: (deckId, card) =>
     request(ENDPOINTS.flashcards(deckId), { method: "POST", body: card }),
-  updateFlashcard: (id, card) =>
-    request(ENDPOINTS.flashcard(id), { method: "PUT", body: card }),
-  deleteFlashcard: (id) =>
-    request(ENDPOINTS.flashcard(id), { method: "DELETE" }),
+  updateFlashcard: (deckId, cardId, card) =>
+    request(ENDPOINTS.flashcard(deckId, cardId), { method: "PUT", body: card }),
+  deleteFlashcard: (deckId, cardId) =>
+    request(ENDPOINTS.flashcard(deckId, cardId), { method: "DELETE" }),
 
   // --- search ---
   // (`${ENDPOINTS.search}?q=${encodeURIComponent(query)}`)

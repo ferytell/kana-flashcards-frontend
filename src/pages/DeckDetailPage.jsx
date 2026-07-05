@@ -47,11 +47,33 @@ export default function DeckDetailPage() {
 
   async function handleUpdate(cardId, values) {
     setError(null);
+
+    if (!values || (!values.question?.trim() && !values.answer?.trim())) {
+      setError("Question and answer cannot be empty");
+      return;
+    }
+
     try {
-      const updated = await api.updateFlashcard(cardId, values);
-      setCards((prev) => prev.map((c) => (c.id === cardId ? updated : c)));
+      const updated = await api.updateFlashcard(deckId, cardId, values);
+
+      const normalizedUpdate = {
+        id: updated.id ?? updated.cardId ?? cardId,
+        question: updated.question ?? values.question,
+        answer: updated.answer ?? values.answer,
+        deckId: updated.deckId ?? deckId,
+        ...updated,
+      };
+
+      setCards((prev) =>
+        prev.map((c) => {
+          if (c.id == cardId) {
+            return { ...c, ...normalizedUpdate };
+          }
+          return c;
+        }),
+      );
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Failed to update flashcard");
     }
   }
 
@@ -71,7 +93,14 @@ export default function DeckDetailPage() {
       <Link to="/decks" className="back-link">
         ← All decks
       </Link>
-      <h1>{deck?.title || "Deck"}</h1>
+      <div className="deck-detail-header">
+        <h1>{deck?.title || "Deck"}</h1>
+        {cards.length > 0 && (
+          <Link to={`/decks/${deckId}/quiz`} className="btn btn-primary btn-sm">
+            Start quiz
+          </Link>
+        )}
+      </div>
       {deck?.description && (
         <p className="deck-description">{deck.description}</p>
       )}
