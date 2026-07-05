@@ -1,6 +1,7 @@
 .search-hint {
   color: var(--color-text-muted);
   margin-top: -0.4em;
+  margin-bottom: 1.2em;
 }
 
 .search-form {
@@ -16,28 +17,93 @@
   border-radius: var(--radius);
   background: var(--color-surface);
   color: var(--color-ink);
+  font-size: 1rem;
 }
 
 .search-form input:focus {
   border-color: var(--color-violet);
+  outline: none;
 }
 
-.search-placeholder {
-  border: 1.5px dashed var(--color-border);
-  border-radius: var(--radius);
+.search-form button {
+  white-space: nowrap;
 }
 
 .search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.search-result-item {
+  padding: 1em 1.2em;
+}
+
+.search-result-item h3 {
+  margin: 0 0 0.3em 0;
+  font-size: 1.1rem;
+}
+
+.search-result-item h3 a {
+  color: var(--color-violet);
+  text-decoration: none;
+}
+
+.search-result-item h3 a:hover {
+  text-decoration: underline;
+}
+
+.deck-description {
+  color: var(--color-text-muted);
+  margin: 0 0 0.6em 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.flashcard-count {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0 0 0.8em 0;
+}
+
+.flashcard-preview-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6em;
+  gap: 0.4em;
 }
 
-.search-result-item {
+.flashcard-preview {
   display: flex;
-  gap: 0.8em;
-  padding: 0.8em 1em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 0.75em;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.flashcard-preview .question {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.flashcard-preview .answer {
+  color: var(--color-text-muted);
+}
+
+.flashcard-preview .answer::before {
+  content: "→";
+  margin-right: 0.4em;
+  color: var(--color-border);
+}
+
+.more-cards {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  padding: 0.3em 0;
+  font-style: italic;
 }

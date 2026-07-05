@@ -92,15 +92,17 @@ export default function DecksPage() {
       ) : (
         <ul className="deck-list">
           {decks.map((deck) => (
-            <li key={deck.id} className="card deck-item">
-              <Link to={`/decks/${deck.id}`} className="deck-item-name">
-                {deck.title}
+            <li key={deck.id} className="deck-item">
+              <div className="deck-item-content">
+                <Link to={`/decks/${deck.id}`} className="deck-item-title">
+                  {deck.title}
+                </Link>
+
                 {deck.description && (
-                  <span className="deck-item-description">
-                    {deck.description}
-                  </span>
+                  <p className="deck-item-description">{deck.description}</p>
                 )}
-              </Link>
+              </div>
+
               <div className="deck-item-actions">
                 <Link
                   to={`/decks/${deck.id}`}

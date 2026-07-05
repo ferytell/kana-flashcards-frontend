@@ -7,9 +7,7 @@ const ENDPOINTS = {
   deck: (id) => `/decks/${id}`,
   flashcards: (deckId) => `/decks/${deckId}/cards`,
   flashcard: (deckId, cardId) => `/decks/${deckId}/cards/${cardId}`,
-  //flashcard: (id) => `/decks/${id}/cards`,
-  // Not built on the backend yet — see search() below.
-  search: "/search",
+  search: "/decks/search",
 };
 
 function getToken() {
@@ -102,9 +100,8 @@ export const api = {
     request(ENDPOINTS.flashcard(deckId, cardId), { method: "DELETE" }),
 
   // --- search ---
-  // (`${ENDPOINTS.search}?q=${encodeURIComponent(query)}`)
   search: async (query) => {
-    throw new Error("NOT_IMPLEMENTED");
+    return request(`${ENDPOINTS.search}?title=${encodeURIComponent(query)}`);
   },
 };
 
