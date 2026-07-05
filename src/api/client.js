@@ -76,8 +76,12 @@ export const api = {
       auth: false,
     });
   },
-  register: (details) =>
-    request(ENDPOINTS.register, { method: "POST", body: details, auth: false }),
+  register: (credentials) =>
+    request(ENDPOINTS.register, {
+      method: "POST",
+      body: credentials,
+      auth: false,
+    }),
 
   // --- decks ---
   getDecks: () => request(ENDPOINTS.decks),
