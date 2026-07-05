@@ -22,16 +22,26 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const register = useCallback(async (username, password) => {
-    setError(null);
-    try {
-      await api.register({ username, password });
-      return true;
-    } catch (err) {
-      setError(err.message);
-      return false;
-    }
-  }, []);
+  const register = useCallback(
+    async ({ username, password, fullName, email }) => {
+      setError(null);
+      try {
+        const data = await api.register({
+          username,
+          password,
+          fullName,
+          email,
+        });
+        setToken(data.token);
+        //setIsAuthenticated(true);
+        return true;
+      } catch (err) {
+        setError(err.message);
+        return false;
+      }
+    },
+    [],
+  );
 
   const logout = useCallback(() => {
     setToken(null);

@@ -8,37 +8,39 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     clearError();
-    setSubmitting(true);
-    const ok = await register(username, password);
-    setSubmitting(false);
-    if (ok) setDone(true);
-  }
 
-  if (done) {
-    return (
-      <div className="auth-page">
-        <div className="card auth-card">
-          <h1 className="auth-title">Account created</h1>
-          <p className="auth-subtitle">You can log in now.</p>
-          <button className="btn btn-primary" onClick={() => navigate("/login")}>
-            Go to login
-          </button>
-        </div>
-      </div>
-    );
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    setSubmitting(true);
+    const ok = await register({
+      username,
+      fullName,
+      email,
+      password,
+    });
+    setSubmitting(false);
+
+    if (ok) navigate("/decks");
   }
 
   return (
     <div className="auth-page">
       <form className="card auth-card" onSubmit={handleSubmit}>
         <h1 className="auth-title">Create an account</h1>
-        <p className="auth-subtitle">Start building decks to remember anything.</p>
+        <p className="auth-subtitle">
+          Sign up to start building your flashcard decks.
+        </p>
 
         {error && <div className="error-banner">{error}</div>}
 
@@ -50,6 +52,30 @@ export default function RegisterPage() {
             autoComplete="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor="fullName">Full Name</label>
+          <input
+            id="fullName"
+            type="text"
+            autoComplete="name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -67,8 +93,20 @@ export default function RegisterPage() {
           />
         </div>
 
+        <div className="field">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            autoComplete="new-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
+
         <button className="btn btn-primary" type="submit" disabled={submitting}>
-          {submitting ? "Creating account…" : "Create account"}
+          {submitting ? "Creating account…" : "Sign up"}
         </button>
 
         <p className="auth-switch">
