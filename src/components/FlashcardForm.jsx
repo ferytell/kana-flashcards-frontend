@@ -1,9 +1,6 @@
 import { useState } from "react";
 import "./FlashcardForm.css";
 
-// Generic "question / answer" flashcard (matches the confirmed API body:
-// { question, answer, category }), not kana-specific, so the same deck/card
-// model works for any subject the user wants to memorize later.
 export default function FlashcardForm({
   initial,
   onSubmit,

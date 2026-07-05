@@ -1,6 +1,3 @@
-// Single place that knows how to talk to the Spring Boot backend.
-// If an endpoint path changes on the backend, this is the only file you edit.
-
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ENDPOINTS = {
@@ -59,7 +56,7 @@ async function request(path, { method = "GET", body, auth = true } = {}) {
       const data = await response.json();
       message = data.message || data.error || message;
     } catch {
-      // response had no JSON body — keep the generic message
+      message = "unkown error";
     }
     throw new Error(message);
   }

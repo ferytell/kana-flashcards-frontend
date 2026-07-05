@@ -3,10 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import "./QuizPage.css";
 
-// Simple, forgiving match: trims whitespace and ignores case, so
-// "Ookii" and "ookii " both count as correct. This is a reasonable
-// default for typed guesses, not a guarantee it matches every backend
-// answer format exactly (e.g. it won't understand synonyms).
+// Simple, forgiving match: trims whitespace and ignores case
 function isCorrectGuess(guess, answer) {
   return guess.trim().toLowerCase() === String(answer).trim().toLowerCase();
 }
@@ -126,7 +123,9 @@ export default function QuizPage() {
           <div className="card quiz-card">
             <p className="quiz-question">{currentCard.question}</p>
             {currentCard.category && (
-              <span className="flashcard-item-category">{currentCard.category}</span>
+              <span className="flashcard-item-category">
+                {currentCard.category}
+              </span>
             )}
 
             {!revealed ? (
@@ -144,7 +143,11 @@ export default function QuizPage() {
               </form>
             ) : (
               <div className="quiz-result">
-                <p className={wasCorrect ? "quiz-feedback-correct" : "quiz-feedback-wrong"}>
+                <p
+                  className={
+                    wasCorrect ? "quiz-feedback-correct" : "quiz-feedback-wrong"
+                  }
+                >
                   {wasCorrect ? "Correct!" : "Not quite."}
                 </p>
                 <p className="quiz-answer">
