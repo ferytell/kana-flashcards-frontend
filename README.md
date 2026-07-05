@@ -1,70 +1,59 @@
-# React + TypeScript + Vite
+# Kana Flashcards Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-featured flashcard application built with **React + TypeScript + Vite** for learning Japanese Kana (and any other subjects). Create decks, add flashcards, and practice with a quiz mode.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **User Authentication** — Register and login
+- **Deck Management** — Create, view, edit, and delete decks
+- **Flashcard CRUD** — Add, edit, and delete flashcards within decks
+- **Quiz Mode** — Practice your cards in a dedicated quiz interface
+- **Search** — Global search across your flashcards (UI ready)
+- **Responsive Design** — Clean and mobile-friendly UI
+- **Protected Routes** — Secure access to user content
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19, TypeScript, Vite
+- **Routing**: React Router DOM v7
+- **Styling**: CSS Modules / vanilla CSS
+- **State Management**: React Context (Auth)
+- **Backend Integration**: REST API (fetch-based client)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,jsx}"],
-    extends: [
-      // Other configs...
+- Node.js (v18+ recommended)
+- A running backend API (see [backend repo](https://github.com/ferytell/kana-flashcards-backend) if available)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+1. Clone the repository
+   git clone https://github.com/ferytell/kana-flashcards-frontend.git
+   cd kana-flashcards-frontend
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependenciesbash
+   npm install
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+3. Configure environment variablesCreate a .env file in the root:env
+   VITE_API_BASE_URL=http://localhost:5000/api
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,jsx}"],
-    extends: [
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
-]);
-```
+4. Run the development server
+   npm run dev
+   Open http://localhost:5173 in your browser.
+
+## Available Scripts
+
+npm run dev — Start development server
+npm run build — Build for production
+npm run preview — Preview production build
+npm run lint — Run ESLint
+
+## How to Use
+
+- Register / Login to create an account.
+- Create a Deck (e.g., "Hiragana", "N5 Vocabulary").
+- Add Flashcards with front (question) and back (answer).
+- Practice by opening a deck and starting the Quiz.
+- Use the Search feature to find cards across all decks.
