@@ -2,7 +2,7 @@ name: Deploy React App to Ubuntu Server
 
 on:
   push:
-    branches: ["react-web"]
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -40,5 +40,3 @@ jobs:
           sudo mkdir -p /var/www/flashcards
            sudo rm -rf /var/www/flashcards/*
            sudo cp -r dist/* /var/www/flashcards/
-
-
